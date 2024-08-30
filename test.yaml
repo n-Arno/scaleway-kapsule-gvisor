@@ -6,6 +6,13 @@ spec:
   containers:
   - name: nginx
     image: nginx:alpine
+    resources:
+      requests:
+        memory: "750Mi"
+        cpu: "500m"
+      limits:
+        memory: "1500Mi"
+        cpu: "1000m"
   runtimeClassName: gvisor
   tolerations:
     - key: k8s.scaleway.com/gvisor

@@ -4,7 +4,7 @@ NEED_RESTART=0
 
 Install() {
   # From official installation procedure https://gvisor.dev/docs/user_guide/install/
-  echo "Installation gVisor binaries"
+  echo "=== Installing gVisor binaries ==="
   (
     set -e
     ARCH=$(uname -m)
@@ -21,17 +21,22 @@ Install() {
 }
 
 Config() {
-  echo "Configuring containerd"
+  echo "=== Configuring containerd ==="
   # Backup only if no backup already exists
   [ ! -f /etc/containerd/config.toml.orig ] && cp /etc/containerd/config.toml /etc/containerd/config.toml.orig
 
   # Copy downloaded config over the current one
   cp /tmp/gvisor/config.toml /etc/containerd/config.toml
+
+  # Install runsc config in any case
+  cp /tmp/gvisor/runsc.toml /etc/containerd/runsc.toml
   NEED_RESTART=1
 }
 
 
 Main() {
+  echo "=== Starting gVisor installation ==="
+
   # Check if binary present, install otherwise
   if [[ ! -f  /usr/local/bin/runsc || ! -f /usr/local/bin/containerd-shim-runsc-v1 ]]; then
     Install
@@ -42,7 +47,7 @@ Main() {
 
   # If any action has been done needing a containerd restart, do it.
   if [ "$NEED_RESTART" -eq "1" ]; then
-    echo "Restarting containerd to finish setup"
+    echo "=== Restarting containerd to finish setup ==="
     systemctl restart containerd
   fi
 }

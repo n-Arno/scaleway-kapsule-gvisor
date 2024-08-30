@@ -31,3 +31,9 @@ Run test
 kubectl apply -f test.yaml
 ```
 
+warning
+-------
+
+This method will install gVisor on selected nodes using a Daemonset. The associated pod execute a restart of containerd if needed which may affect other pods on the nodes.
+
+Also, the containerd original `config.toml` file is overwritten with the one provided. This config is valid at the current time but may not take into account future parameters added by the Kapsule team.

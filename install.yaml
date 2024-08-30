@@ -13,6 +13,7 @@ spec:
         app: gvisor
     spec:
       hostPID: true
+      hostNetwork: true
       restartPolicy: Always
       containers:
       - image: ghcr.io/n-arno/scaleway-kapsule-gvisor:latest

@@ -39,3 +39,10 @@ This method will install gVisor on selected nodes using a Daemonset. The associa
 Also, the containerd original `config.toml` file is overwritten with the one provided. This config is valid at the current time but may not take into account future parameters added by the Kapsule team. In any case, the config file now leverage `version = 2` to be able to use the `ConfigPath` option which is not the case for the original configuration.
 
 gVisor will leverage systemd-cgroups using the experimental flag provided in `runsc.toml`
+
+support
+-------
+
+This method is provided as-is and nodes with configuration modified fall outside of the responsability matrix of Scaleway managed Kubernetes. To use it, you need to understand the inner working of containerd runtimes with kubernetes to be able to debug any problem.
+
+Tested on v1.30.2 nodes.

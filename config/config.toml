@@ -1,0 +1,29 @@
+[plugins.cri.containerd]
+  no_pivot = false
+[plugins.cri.containerd.runtimes]
+  [plugins.cri.containerd.runtimes.runc]
+     runtime_type = "io.containerd.runc.v2"
+     [plugins.cri.containerd.runtimes.runc.options]
+       NoPivotRoot = false
+       NoNewKeyring = false
+       ShimCgroup = ""
+       IoUid = 0
+       IoGid = 0
+       BinaryName = "runc"
+       Root = ""
+       CriuPath = ""
+       SystemdCgroup = true
+  [plugins.cri.containerd.untrusted]
+    runtime_type = "io.containerd.runsc.v1"
+  [plugins.cri.containerd.runtimes.runsc]
+     runtime_type = "io.containerd.runsc.v1"
+     [plugins.cri.containerd.runtimes.runsc.options]
+       NoPivotRoot = false
+       NoNewKeyring = false
+       ShimCgroup = ""
+       IoUid = 0
+       IoGid = 0
+       BinaryName = "/usr/local/bin/runsc"
+       Root = ""
+       CriuPath = ""
+       SystemdCgroup = true
